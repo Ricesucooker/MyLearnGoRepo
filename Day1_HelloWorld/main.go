@@ -5,36 +5,34 @@ import (
 	"time"
 )
 
-const japanese = "Japanese"
-const chinese = "Chinese"
-const englishHelloPrefix = "Hello, "
-const japaneseHelloPrefix = "こんにちは, "
-const chineseHelloPrefix = "你好, "
+const (
+	japanese            = "Japanese"
+	chinese             = "Chinese"
+	englishHelloPrefix  = "Hello, "
+	japaneseHelloPrefix = "こんにちは, "
+	chineseHelloPrefix  = "你好, "
+)
 
 // created a new function define that hello world is a string
 func Hello(name string, language string) string {
 	if name == "" {
 		name = "World"
 	}
+	return greetingPrefix(language) + name
+}
 
-	prefix := englishHelloPrefix
+func greetingPrefix(language string) (prefix string) {
 
 	switch language {
 	case japanese:
 		prefix = japaneseHelloPrefix
 	case chinese:
 		prefix = chineseHelloPrefix
+	default:
+		prefix = englishHelloPrefix
 	}
 
-	return prefix + name
-
-	// if language == japanese {
-	// 	return japaneseHelloPrefix + name
-	// }
-	// if language == chinese {
-	// 	return chineseHelloPrefix + name
-	// }
-	// return englishHelloPrefix + name
+	return
 }
 
 func GetCurrentTime() time.Time {
@@ -44,4 +42,6 @@ func GetCurrentTime() time.Time {
 func main() {
 	fmt.Println(Hello("world", ""))
 	fmt.Println(GetCurrentTime())
+	fmt.Println(Hello("月球", "Chinese"))
+	fmt.Println(Hello("美月", "Japanese"))
 }
